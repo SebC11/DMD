@@ -4,6 +4,7 @@ urls = (
     '/', 'home'
 )
 
+render = web.template.render("Views/Templates", base="MainLayout")
 app = web.application(urls, globals())
 
 #Classes/Routes
