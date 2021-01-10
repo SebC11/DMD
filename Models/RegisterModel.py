@@ -1,13 +1,16 @@
 import pymongo
 from pymongo import MongoClient
-
+import bcrypt
 
 class RegisterModel:
 
     def __init__(self):
-        client = pymongo.MongoClient("mongodb+srv://dbAdmin:FAKEUSER@cluster0.ljibd.mongodb.net/FAKETABLENAME?retryWrites=true&w=majority")
-        self.db = self.client.users
+        self.client = pymongo.MongoClient("DUMMY")
+        self.db = self.client["users"]
+        self.col = self.db["user"]
 
 
-    def insert_email(self, data):
-        print("data is", data);
+    def insert_user(self, data):
+        hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt())
+        id = self.col.insert_one({"email": data.email, "firstName": data.firstName, "lastName": data.lastName, "password": hashed})
+        print("uid is", id.inserted_id)

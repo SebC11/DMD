@@ -1,5 +1,5 @@
 import web
-from Models import RegisterModel
+from Models import RegisterModel, LoginModel
 
 
 urls = (
@@ -8,7 +8,9 @@ urls = (
     '/postregistration', 'PostRegistration',
     '/discover', 'Discover',
     '/profile', 'Profile',
-    '/settings', 'Settings'
+    '/settings', 'Settings',
+    '/login', "Login",
+    '/check-login', 'CheckLogin'
 )
 
 render = web.template.render("Views/Templates", base="MainLayout")
@@ -45,8 +47,26 @@ class PostRegistration:
     def POST(self):
         data = web.input()
         reg_model = RegisterModel.RegisterModel()
-        reg_model.insert_email(data)
+        reg_model.insert_user(data)
         return data.email
+
+
+class CheckLogin:
+    def POST(self):
+        print("in the post")
+        data = web.input()
+        login_model = LoginModel.LoginModel()
+        isCorrect = login_model.check_user(data)
+        if isCorrect:
+            print("success")
+            return isCorrect
+
+        return "error"
+
+
+class Login:
+    def GET(self):
+        return render.Login()
 
 
 if __name__ == "__main__":
