@@ -1,3 +1,26 @@
-<div style="">
-    Test
+<div class="container">
+    $if session['user'] == None:
+        <h1>Hello DMD's</h1>
+    $else:
+        <div class = "row">
+            <div class="col justify-content-md-start">
+            <ul class="sidebar">
+                <li>TEXT</li>
+                <li>TEXT</li>
+                <li>TEXT</li>
+                <li>TEXT</li>
+            </ul>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                     <form id="post-activity">
+                        <textarea name="content" class="post-input" style="resize: none; border:none; outline:none;" placeholder="What discrete problem has been erking you $session['user']['firstName']?"></textarea>
+                        <button id="post-button" class="btn btn-raised ripple-wave" type="submit"><span class="mdi mdi-send"</button>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
 </div>

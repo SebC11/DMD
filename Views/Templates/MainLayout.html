@@ -1,5 +1,5 @@
 $def with (page)
-$var css: static/css/bootstrap.css static/css/mdb.min.css static/css/style.css
+$var css: static/css/bootstrap.css static/css/mdb.min.css
 $var js: static/js/jquery-3.5.1.min.js static/js/bootstrap.js static/js/mdb.min.js static/js/script.js
 <html lang="en">
 <head>
@@ -36,13 +36,25 @@ $var js: static/js/jquery-3.5.1.min.js static/js/bootstrap.js static/js/mdb.min.
                         <a class="nav-link" href="/settings">Settings</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <button class="btn btn-default btn-raised" style="background-color: #4286f4">
-                            <a href="/register">Register</a>
-                        </button>
-                    </li>
-                </ul>
+                $if session['user'] == None:
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button class="btn btn-default btn-raised btn-light">
+                                <a href="/login">Login</a>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-default btn-raised btn-light">
+                                <a href="/register">Register</a>
+                            </button>
+                        </li>
+                    </ul>
+                $else:
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a id = "logout-link" class="btn btn-default btn-raised">Logout</a>
+                        </li>
+                    </ul>
 
         </div>
     </nav>
