@@ -1,5 +1,5 @@
 $def with (page)
-$var css: static/css/bootstrap.css static/css/mdb.min.css
+$var css: static/css/bootstrap.css static/css/mdb.min.css static/css/style.css
 $var js: static/js/jquery-3.5.1.min.js static/js/bootstrap.js static/js/mdb.min.js static/js/script.js
 <html lang="en">
 <head>
@@ -9,6 +9,7 @@ $var js: static/js/jquery-3.5.1.min.js static/js/bootstrap.js static/js/mdb.min.
     $if self.css:
         $for style in self.css.split():
             <link rel="stylesheet" href="$style"/>
+    <script src="https://kit.fontawesome.com/e9354ca1c4.js" crossorigin="anonymous"></script>
 </head>
 <body>
 

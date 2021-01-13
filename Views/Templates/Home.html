@@ -1,26 +1,37 @@
+$def with (posts)
+
 <div class="container">
     $if session['user'] == None:
         <h1>Hello DMD's</h1>
     $else:
-        <div class = "row">
-            <div class="col justify-content-md-start">
-            <ul class="sidebar">
-                <li>TEXT</li>
-                <li>TEXT</li>
-                <li>TEXT</li>
-                <li>TEXT</li>
-            </ul>
-            </div>
+            <!-- Do front end later cause ;-; -->
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="CONTAINER-LARGE">
+                    <div class="card">
+                      <form id="post-activity">
+                        <div class="card-body">
+                            <textarea name="content" class="post-input" placeholder="What discrete problem has been erking you $session['user']['username']?"></textarea>
+                            <div class="row d-flex">
+                                <div class="col justify-content-end">
+                                    <button type="submit" class="btn btn-default btn-circle bg-black"><i class="fas fa-play"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                    <br>
+                    $for post in posts:
+                        <div class="card">
+                          <div class="d-inline-flex">
+                              <img class="card-img-top" src="" alt="img">
+                              <span>$post['username']</span>
+                          </div>
+                          <div class="card-body">
+                            <p class="card-text">$post['content']</p>
+                          </div>
+                        </div>
 
-            <div class="col-md-6">
-                <div class="card">
-                  <div class="card-body">
-                     <form id="post-activity">
-                        <textarea name="content" class="post-input" style="resize: none; border:none; outline:none;" placeholder="What discrete problem has been erking you $session['user']['firstName']?"></textarea>
-                        <button id="post-button" class="btn btn-raised ripple-wave" type="submit"><span class="mdi mdi-send"</button>
-                    </form>
-                  </div>
                 </div>
             </div>
-        </div>
+
 </div>
