@@ -5,7 +5,7 @@ import bcrypt
 class RegisterModel:
 
     def __init__(self):
-        self.client = pymongo.MongoClient("mongodb+srv://dbAdmin:Rawman03@cluster0.ljibd.mongodb.net/users?retryWrites=true&w=majority")
+        self.client = pymongo.MongoClient("")
         self.db = self.client["users"]
         self.col = self.db["user"]
 
