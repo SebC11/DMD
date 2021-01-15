@@ -10,8 +10,8 @@ $(document).ready(function(){
             url: '/postregistration',
             type: 'POST',
             data: form,
-            success: function(response){
-                console.log(response)
+            success: function(){
+                window.location.href='/login'
             }
         });
     });
@@ -59,6 +59,22 @@ $(document).ready(function(){
             data: form,
             success: function(response){
                 console.log(response);
+            }
+        });
+    });
+    $(document).on("submit", '#settings-form', function (e) {
+        e.preventDefault();
+        form = $(this).serialize();
+        $.ajax({
+            url: '/post-settings',
+            type: 'POST',
+            data: form,
+            success: function(response){
+                if(response == "success"){
+                    window.location.href = window.location.href;
+                } else {
+                    alert(response);
+                }
             }
         });
     });

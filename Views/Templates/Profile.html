@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+$def with (posts)
+$if session['user'] == None:
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="container-large bg-light ">
+            <h2 class="text-center">Redirecting you to the login page.</h2>
+        </div>
+    </div>
+    <meta http-equiv="refresh" content="1.5; URL='/login'" />
+$else:
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="container-extra-large">
+            <div class="image-container">
+                <img class="bg-img" src="https://www.theuiaa.org/wp-content/uploads/2017/12/2018_banner.jpg">
+                <div class="centered bg-black">
+                    <img class="pfp" src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg">
+                    <br>
+                    <span style="text-align: center">Username</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</body>
-</html>
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="container-extra-large">
+            <div class="row mb-4 bg-light">
+                <div class="col mb-2">
+                    <button id = "Activity" class="nav-item btn-raised btn">Activity</button>
+                    <button id = "About" class="nav-item btn-raised btn">About</button>
+                </div>
+
+            </div>
+            <div class='container-grid'>
+                <div class='masonry-grid'>
+                  $for post in posts:
+                  <div class="cell">
+                      <img src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px;">
+                      $post['username']
+                      <br>
+                      $post['content']
+                      <br>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>

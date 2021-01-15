@@ -21,6 +21,12 @@ class Posts:
         for post in all_posts:
             post['user'] = self.users.find_one({"username": post['username']})
             new_posts.append(post)
+        return new_posts
 
-
+    def get_user_posts(self, user):
+        all_posts = self.posts.find({"username": user}).sort("data_added", -1)
+        new_posts = []
+        for post in all_posts:
+            post['user'] = self.users.find_one({"username": post['username']})
+            new_posts.append(post)
         return new_posts

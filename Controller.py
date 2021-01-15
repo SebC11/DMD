@@ -8,12 +8,13 @@ urls = (
     '/register', 'Register',
     '/postregistration', 'PostRegistration',
     '/discover', 'Discover',
-    '/profile', 'Profile',
+    '/profile/(.*)', 'Profile',
     '/settings', 'Settings',
     '/login', 'Login',
     '/logout', 'Logout',
     '/check-login', 'CheckLogin',
-    '/post-activity', 'PostActivity'
+    '/post-activity', 'PostActivity',
+    '/post-settings', 'PostSettings'
 )
 
 
@@ -47,8 +48,11 @@ class Register:
 
 
 class Profile:
-    def GET(self):
-        return render.Profile()
+    def GET(self, user):
+
+        post_model = Posts.Posts()
+        posts = post_model.get_user_posts(user)
+        return render.Profile(posts)
 
 
 class Settings:
@@ -102,6 +106,18 @@ class PostActivity:
         post_model.insert_post(data)
 
         return "success"
+
+class PostSettings:
+    def POST(self):
+        data = web.input()
+        data.username = session_data["user"]["username"]
+
+        settings_model = LoginModel.LoginModel()
+        if settings_model.update_info(data):
+            return "success"
+        else:
+            return "A fatal error has occurred"
+
 
 
 if __name__ == "__main__":
