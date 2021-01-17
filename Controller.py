@@ -9,12 +9,12 @@ urls = (
     '/postregistration', 'PostRegistration',
     '/discover', 'Discover',
     '/profile/(.*)', 'Profile',
-    '/settings', 'Settings',
+    '/settings/(.*)', 'Settings',
     '/login', 'Login',
     '/logout', 'Logout',
     '/check-login', 'CheckLogin',
     '/post-activity', 'PostActivity',
-    '/post-settings', 'PostSettings'
+    '/post-settings', 'PostSettings',
 )
 
 
@@ -48,16 +48,19 @@ class Register:
 
 
 class Profile:
-    def GET(self, user):
+    def GET(self, username):
 
         post_model = Posts.Posts()
-        posts = post_model.get_user_posts(user)
-        return render.Profile(posts)
+        posts = post_model.get_user_posts(username)
+        user = post_model.get_user(username)
+        return render.Profile(posts, user)
 
 
 class Settings:
-    def GET(self):
-        return render.Settings()
+    def GET(self, user):
+        if session_data['user']['username'] == user:
+            return render.Settings(user)
+
 
 
 class Discover:

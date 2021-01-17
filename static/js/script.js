@@ -33,7 +33,7 @@ $(document).ready(function(){
             }
         });
     });
-    $(document).on('click', '#logout-link', function(e){
+    $(document).on('click', '#logout', function(e){
         console.log("triggered logout");
         e.preventDefault();
 

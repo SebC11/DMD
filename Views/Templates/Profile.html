@@ -1,20 +1,22 @@
-$def with (posts)
+$def with (posts, user)
+
 $if session['user'] == None:
+
     <div class="d-flex align-items-center justify-content-center">
         <div class="container-large bg-light ">
             <h2 class="text-center">Redirecting you to the login page.</h2>
         </div>
     </div>
-    <meta http-equiv="refresh" content="1.5; URL='/login'" />
+    <meta http-equiv="refresh" content="1.5; URL='/login'"/>
 $else:
     <div class="d-flex align-items-center justify-content-center">
         <div class="container-extra-large">
             <div class="image-container">
-                <img class="bg-img" src="https://www.theuiaa.org/wp-content/uploads/2017/12/2018_banner.jpg">
+                <img class="bg-img" src="https://www.theuiaa.org/wp-content/uploads/2017/12/2018_banner.jpg" alt="alt">
                 <div class="centered bg-black">
-                    <img class="pfp" src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg">
+                    <img class="pfp" src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" alt="alt">
                     <br>
-                    <span style="text-align: center">Username</span>
+                    <span style="text-align: center"></span>
                 </div>
             </div>
         </div>
@@ -33,7 +35,7 @@ $else:
                 <div class='masonry-grid'>
                   $for post in posts:
                   <div class="cell">
-                      <img src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px;">
+                      <img src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" alt="alt" style="width: 32px; height: 32px;">
                       $post['username']
                       <br>
                       $post['content']
