@@ -15,6 +15,7 @@ urls = (
     '/check-login', 'CheckLogin',
     '/post-activity', 'PostActivity',
     '/post-settings', 'PostSettings',
+    '/update-stars', "UpdateStars"
 )
 
 
@@ -58,7 +59,9 @@ class Profile:
 
 class Settings:
     def GET(self, user):
-        if session_data['user']['username'] == user:
+        if session_data['user']['username'] != user:
+            return Home.GET(self)
+        else:
             return render.Settings(user)
 
 
@@ -121,7 +124,13 @@ class PostSettings:
         else:
             return "A fatal error has occurred"
 
+class UpdateStars:
+    def POST(self):
+        data = web.input()
+        post_model = Posts.Posts()
+        post_model.add_star(data.content, data.username, data.stars)
 
+        return "success"
 
 if __name__ == "__main__":
     app.run()

@@ -18,7 +18,8 @@ $(document).ready(function(){
     $(document).on("submit", "#login-form", function(e){
         e.preventDefault();
         console.log("Login Attempted");
-        var form = $(this).serialize();
+        let form = $(this).serialize();
+        console.log(form);
         $.ajax({
             url: '/check-login',
             type: 'POST',
@@ -65,6 +66,7 @@ $(document).ready(function(){
     $(document).on("submit", '#settings-form', function (e) {
         e.preventDefault();
         form = $(this).serialize();
+
         $.ajax({
             url: '/post-settings',
             type: 'POST',
@@ -78,4 +80,28 @@ $(document).ready(function(){
             }
         });
     });
+   $('a#button').click(function() {
+       console.log("liked");
+       let stars = $('#stars').text();
+       let numberOfStars = parseInt(stars) + 1;
+       let content = encodeURI(document.getElementById("postContent").innerText);
+       let username = encodeURI(document.getElementById("postUsername").innerText);
+       let form = "content=" + content + "&username=" + username + "&stars=" + numberOfStars.toString();
+       $.ajax({
+           url: '/update-stars',
+           type: 'POST',
+           data: form,
+           success: function (response) {
+               if(response == "success"){
+                   document.getElementById("stars").innerText = numberOfStars.toString();
+                   console.log("We did it");
+
+               } else {
+                   console.log("Failure");
+               }
+           }
+       });
+
+   });
+
 });

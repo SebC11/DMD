@@ -30,29 +30,32 @@ $def with (posts)
             <!-- Do front end later cause ;-; -->
             <div class="d-flex align-items-center justify-content-center">
                 <div class="CONTAINER-LARGE">
-                    <div class="card">
+                    <div class="card mb-5">
                         <div class="card-body">
                             <form id="post-activity">
-                                <textarea name="content" class="post-input" placeholder="What discrete problem has been erking you $session['user']['username']?"></textarea>
+                                <textarea name="content" class="post-input mb-3" placeholder="What discrete problem has been erking you $session['user']['username']?"></textarea>
                                 <button type="submit" class="btn btn-default btn-circle bg-black"><i class="fas fa-play"></i></button>
                             </form>
                         </div>
                     </div>
-                    <br>
-                   <div class='container-grid'>
+                   <div class='container-grid mb-5'>
                      <div class='masonry-grid'>
                        $for post in posts:
                          <div class="cell">
-                             <img src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px;">
-                             $post['username']
-                             <br>
-                             $post['content']
-                             <br>
+                             <div class="d-flex align-content-end">
+                                 <img src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px; float:left;">
+                                 <a id="postUsername"class="mb-3" href="/profile/$post['username']"> $post['username']</a>
+                             </div>
+                             <p id="postContent" class="mb-0">$post['content']</p>
+                             <div class="d-flex justify-content-end me-2">
+                                 <a id="button" title="button"class="mb-0"><i class="fas fa-star"></i><p id="stars" class="text-center">$post['stars']</p></a>
+                             </div>
+
+
                          </div>
 
                      </div>
                    </div>
-
                 </div>
             </div>
 
