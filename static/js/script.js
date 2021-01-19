@@ -59,7 +59,7 @@ $(document).ready(function(){
             type: 'POST',
             data: form,
             success: function(response){
-                console.log(response);
+                window.location.href = window.location.href;
             }
         });
     });
@@ -73,19 +73,22 @@ $(document).ready(function(){
             data: form,
             success: function(response){
                 if(response == "success"){
-                    window.location.href = window.location.href;
+                    console.log(response);
+                    window.location.reload(true);
                 } else {
                     alert(response);
                 }
             }
         });
     });
-   $('a#button').click(function() {
+   $('a.button').click(function() {
        console.log("liked");
-       let stars = $('#stars').text();
-       let numberOfStars = parseInt(stars) + 1;
-       let content = encodeURI(document.getElementById("postContent").innerText);
-       let username = encodeURI(document.getElementById("postUsername").innerText);
+       let stars = $(this).children()
+       let numberOfStars = parseInt(stars[1].innerText.toString()) + 1;
+       let id = $(this).id.substring(6);
+       console.log(id.toString());
+       let content = encodeURI(document.getElementById("content" + id.toString()).innerText);
+       let username = encodeURI(document.getElementById("username" + id.toString()).innerText);
        let form = "content=" + content + "&username=" + username + "&stars=" + numberOfStars.toString();
        $.ajax({
            url: '/update-stars',

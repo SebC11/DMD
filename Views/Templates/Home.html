@@ -41,19 +41,22 @@ $def with (posts)
                    <div class='container-grid mb-5'>
                      <div class='masonry-grid'>
                        $for post in posts:
-                         <div class="cell">
+                         $code:
+                            id = str(random.randint(0,2147483647))
+                            usernameID = "username" + id
+                            contentID = "content" + id
+                            buttonID = "button" + id
+
+                         <div class="cell" id=$id>
                              <div class="d-flex align-content-end">
                                  <img src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px; float:left;">
-                                 <a id="postUsername"class="mb-3" href="/profile/$post['username']"> $post['username']</a>
+                                 <a id=$usernameID class="mb-3" href="/profile/$post['username']"> $post['username']</a>
                              </div>
-                             <p id="postContent" class="mb-0">$post['content']</p>
+                             <p id=$contentID class="mb-0">$post['content']</p>
                              <div class="d-flex justify-content-end me-2">
-                                 <a id="button" title="button"class="mb-0"><i class="fas fa-star"></i><p id="stars" class="text-center">$post['stars']</p></a>
+                                 <a id=$buttonID title="button"class="button mb-0"><i class="fas fa-star"></i><p id="stars" class="text-center">$post['stars']</p></a>
                              </div>
-
-
                          </div>
-
                      </div>
                    </div>
                 </div>

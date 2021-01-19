@@ -1,4 +1,3 @@
-$def with (user)
 $if session['user'] == None:
     <div class="d-flex align-items-center justify-content-center">
         <div class="container-large bg-light ">
@@ -18,14 +17,14 @@ $else:
                             <p><input class="form-control no-border" name="name" value="s"></p>
                             <span class="post-subtitle">About</span>
                             <p><input class="form-control no-border" name="about" value="s"></p>
-                            <span class="post-subtitle">University</span>
-                            <p><input class="form-control no-border" name="university" value="s"></p>
                             <span class="post-subtitle">Birthday</span>
                             <p><input class="form-control no-border" name="birthday" value="dummy"></p>
 
 
 
                             <h2 class="post-title">Academics</h2>
+                            <span class="post-subtitle">University</span>
+                            <p><input class="form-control no-border" name="university" value="s"></p>
                             <span class="post-subtitle">Math Courses taken</span>
                             <p><input class="form-control no-border" name="math-courses" value="dummy"></p>
                             <span class="post-subtitle">Least Favorite Discrete Topic</span>

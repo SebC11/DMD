@@ -2,13 +2,13 @@ import pymongo
 from pymongo import MongoClient
 import bcrypt
 
+
 class RegisterModel:
 
     def __init__(self):
-        self.client = pymongo.MongoClient()
+        self.client = pymongo.MongoClient("")
         self.db = self.client["users"]
         self.col = self.db["user"]
-
 
     def insert_user(self, data):
         hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt())

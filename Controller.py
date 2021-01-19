@@ -1,6 +1,6 @@
 import web
+import random
 from Models import RegisterModel, LoginModel, Posts
-
 
 web.config.debug = False
 urls = (
@@ -9,7 +9,7 @@ urls = (
     '/postregistration', 'PostRegistration',
     '/discover', 'Discover',
     '/profile/(.*)', 'Profile',
-    '/settings/(.*)', 'Settings',
+    '/settings', 'Settings',
     '/login', 'Login',
     '/logout', 'Logout',
     '/check-login', 'CheckLogin',
@@ -18,16 +18,16 @@ urls = (
     '/update-stars', "UpdateStars"
 )
 
-
 app = web.application(urls, globals())
 session = web.session.Session(app, web.session.DiskStore("sessions"), initializer={'user': None})
 session_data = session._initializer
 
-render = web.template.render("Views/Templates", base="MainLayout", globals={'session': session_data, 'current_user': session_data["user"]})
+render = web.template.render("Views/Templates", base="MainLayout", globals={'session': session_data,
+                                                                            'current_user': session_data["user"],
+                                                                            'random': random, "str": str})
 
 
-
-#Classes/Routes
+# Classes/Routes
 class Home:
     def GET(self):
         # data = type('obj', (object,), {"email" : "test", "password" : "test"})
@@ -50,7 +50,6 @@ class Register:
 
 class Profile:
     def GET(self, username):
-
         post_model = Posts.Posts()
         posts = post_model.get_user_posts(username)
         user = post_model.get_user(username)
@@ -58,12 +57,11 @@ class Profile:
 
 
 class Settings:
-    def GET(self, user):
-        if session_data['user']['username'] != user:
+    def GET(self):
+        if session_data['user'] == None:
             return Home.GET(self)
         else:
-            return render.Settings(user)
-
+            return render.Settings()
 
 
 class Discover:
@@ -93,7 +91,7 @@ class CheckLogin:
 
 class Logout:
     def GET(self):
-        session['user']= None
+        session['user'] = None
         session_data['user'] = None
         session.kill()
         return "success"
@@ -113,6 +111,7 @@ class PostActivity:
 
         return "success"
 
+
 class PostSettings:
     def POST(self):
         data = web.input()
@@ -124,6 +123,7 @@ class PostSettings:
         else:
             return "A fatal error has occurred"
 
+
 class UpdateStars:
     def POST(self):
         data = web.input()
@@ -131,6 +131,7 @@ class UpdateStars:
         post_model.add_star(data.content, data.username, data.stars)
 
         return "success"
+
 
 if __name__ == "__main__":
     app.run()
