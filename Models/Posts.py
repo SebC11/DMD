@@ -1,4 +1,5 @@
 import pymongo
+import datetime
 import bcrypt
 from pymongo import MongoClient
 
@@ -12,7 +13,7 @@ class Posts:
         self.posts = self.db["posts"]
 
     def insert_post(self, data):
-        inserted = self.posts.insert({"username": data.username, "content": data.content, "stars" : 0})
+        inserted = self.posts.insert({"username": data.username, "content": data.content, "stars" : 0, "date": datetime.datetime.now()})
         return True
 
     def get_all_posts(self):

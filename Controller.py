@@ -1,5 +1,6 @@
 import web
 import random
+import datetime
 from Models import RegisterModel, LoginModel, Posts
 
 web.config.debug = False
@@ -24,7 +25,8 @@ session_data = session._initializer
 
 render = web.template.render("Views/Templates", base="MainLayout", globals={'session': session_data,
                                                                             'current_user': session_data["user"],
-                                                                            'random': random, "str": str})
+                                                                            'random': random, "str": str,
+                                                                            'datetime': datetime})
 
 
 # Classes/Routes

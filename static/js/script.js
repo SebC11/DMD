@@ -1,11 +1,10 @@
 $(document).ready(function(){
     console.log("Document Loaded");
-    console.log($("#loginForm"));
     $(document).on("submit", "#register-form", function(e){
         e.preventDefault();
         console.log(e);
         console.log("Form Submitted");
-        var form = $('#register-form').serialize();
+        let form = $('#register-form').serialize();
         $.ajax({
             url: '/postregistration',
             type: 'POST',
@@ -85,6 +84,7 @@ $(document).ready(function(){
        console.log("liked");
        let stars = $(this).children()
        let numberOfStars = parseInt(stars[1].innerText.toString()) + 1;
+       console.log($(this));
        let id = $(this).id.substring(6);
        console.log(id.toString());
        let content = encodeURI(document.getElementById("content" + id.toString()).innerText);
