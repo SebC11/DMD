@@ -80,23 +80,23 @@ $(document).ready(function(){
             }
         });
     });
-   $('a.button').click(function() {
-       console.log("liked");
-       let stars = $(this).children()
-       let numberOfStars = parseInt(stars[1].innerText.toString()) + 1;
-       console.log($(this));
-       let id = $(this).id.substring(6);
-       console.log(id.toString());
-       let content = encodeURI(document.getElementById("content" + id.toString()).innerText);
-       let username = encodeURI(document.getElementById("username" + id.toString()).innerText);
+   $('.like-button').on("click", function() {
+       let elements = document.getElementsByName($(this).attr("name"));
+       let stars = $(this).children()[1].innerText;
+       let button = $(this);
+       let numberOfStars = parseInt(stars) + 1;
+
+       let content = encodeURI(elements[2].innerText);
+       let username = encodeURI(elements[1].innerText);
        let form = "content=" + content + "&username=" + username + "&stars=" + numberOfStars.toString();
+       console.log(form);
        $.ajax({
            url: '/update-stars',
            type: 'POST',
            data: form,
            success: function (response) {
                if(response == "success"){
-                   document.getElementById("stars").innerText = numberOfStars.toString();
+                   button.children()[1].innerHTML = numberOfStars.toString();
                    console.log("We did it");
 
                } else {

@@ -11,6 +11,11 @@ class RegisterModel:
         self.col = self.db["user"]
 
     def insert_user(self, data):
-        hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt())
-        id = self.col.insert_one({"email": data.email, "username": data.username, "password": hashed})
-        print("uid is", id.inserted_id)
+        if self.col.find_one({"email":data.email}) is not None:
+            return "failure"
+        else:
+            hashed = bcrypt.hashpw(data.password.encode(), bcrypt.gensalt());
+            id = self.col.insert_one({"email": data.email, "username": data.username, "password": hashed, "about" : "N/A",
+                                      "birthday" : "N/A", "hobbies" : "N/A", "grade" : "N/A", "least-favorite-course" : "N/A",
+                                      "math-courses" : "N/A","name" : "N/A", "university" : "N/A"})
+            print("uid is", id.inserted_id)

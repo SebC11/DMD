@@ -14,23 +14,23 @@ $else:
                         <div class="post-card bg-light p-3 rounded">
                             <h2 class="post-title">Basic Info</h2>
                             <span class="post-subtitle">Name</span>
-                            <p><input class="form-control no-border" name="name" value="s"></p>
+                            <p><input class="form-control no-border" name="name" value=$session['user']['name']></p>
                             <span class="post-subtitle">About</span>
-                            <p><input class="form-control no-border" name="about" value="s"></p>
+                            <p><input class="form-control no-border" name="about" value=$session['user']['about']></p>
                             <span class="post-subtitle">Birthday</span>
-                            <p><input class="form-control no-border" name="birthday" value="dummy"></p>
+                            <p><input class="form-control no-border" name="birthday" value=$session['user']['birthday']></p>
 
 
 
                             <h2 class="post-title">Academics</h2>
                             <span class="post-subtitle">University</span>
-                            <p><input class="form-control no-border" name="university" value="s"></p>
+                            <p><input class="form-control no-border" name="university" value=$session['user']['university']></p>
                             <span class="post-subtitle">Math Courses taken</span>
-                            <p><input class="form-control no-border" name="math-courses" value="dummy"></p>
+                            <p><input class="form-control no-border" name="math-courses" value=$session['user']['math-courses']></p>
                             <span class="post-subtitle">Least Favorite Discrete Topic</span>
-                            <p><input class="form-control no-border" name="least-favorite-course" value="dummy"></p>
+                            <p><input class="form-control no-border" name="least-favorite-course" value=$session['user']['least-favorite-course']></p>
                             <span class="post-subtitle">Grade</span>
-                            <p><input class="form-control no-border" name="grade" value="dummy"></p>
+                            <p><input class="form-control no-border" name="grade" value=$session['user']['grade']></p>
                             <button class="btn btn-info btn-raised" id="submit" type="submit">Save</button>
 
                         </div>
