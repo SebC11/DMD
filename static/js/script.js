@@ -104,7 +104,14 @@ $(document).ready(function(){
                }
            }
        });
-
    });
+    $(document).on('submit', '.comment-form', function(e){
+        e.preventDefault();
+        let form = $(this).serialize();
 
+
+        $.ajax({
+            url: '/submit-comment'
+        })
+    });
 });

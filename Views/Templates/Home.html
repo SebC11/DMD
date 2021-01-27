@@ -54,6 +54,25 @@ $def with (posts)
                              <div class="d-flex justify-content-end me-2">
                                  <a name=$id class="like-button button mb-0"><i class="fas fa-star"></i><p id="stars" class="text-center">$post['stars']</p></a>
                              </div>
+                             <!--- comments --->
+                             $if post['comments'] != None:
+                                $for comment in post['comments']:
+                                     <div class="bg-dark">
+                                         <div class="d-flex flex-row align-content-end">
+                                             <img class = "m-1" src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px;">
+                                             <a name=$id class="m-1" href="/profile/$comment['username']"> $comment['username']</a>
+                                             <p class="ml-auto ml-4">$comment['date'].strftime('%x')</p>
+                                         </div>
+                                         <p name=$id class="mb-0">$post['content']</p>
+                                     </div>
+                             <div class="comment add clearfix">
+                                 <div class="card-header">
+                                     <form class = "comment-form">
+                                         <textarea name="comment-text" class="form-control" placeholder="Write a comment"></textarea>
+                                         <button type="submit" class="btn btn-raised pull-right">Add Comment</button>
+                                     </form>
+                                 </div>
+                             </div>
                          </div>
 
 
