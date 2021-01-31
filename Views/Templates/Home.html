@@ -35,6 +35,7 @@ $def with (posts)
                             <form id="post-activity">
                                 <textarea name="content" class="post-input mb-3" placeholder="What discrete problem has been erking you $session['user']['username']?"></textarea>
                                 <button type="submit" class="btn btn-default btn-circle bg-black"><i class="fas fa-play"></i></button>
+                                <button type="upload" class="btn btn-default btn-circle bg-black"><i class="fas fa-image"></i></button>
                             </form>
                         </div>
                     </div>
@@ -43,27 +44,36 @@ $def with (posts)
                        $for post in posts:
                          $code:
                             id = str(random.randint(0,2147483647))
-
-                         <div class="cell" name=$id>
-                             <div class="d-flex flex-row align-content-end">
-                                 <img class = "m-1" src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px;">
-                                 <a id="username" name=$id class="m-1" href="/profile/$post['username']"> $post['username']</a>
-                                 <p class="ml-auto ml-4">$post['date'].strftime('%x')</p>
-                             </div>
-                             <p id="content" name=$id class="mb-0">$post['content']</p>
-                             <div class="d-flex justify-content-end me-2">
-                                 <a name=$id class="like-button button mb-0"><i class="fas fa-star"></i><p id="stars" class="text-center">$post['stars']</p></a>
+                            fs = gridfs.GridFS(pymongo.MongoClient())
+                            image = fs.get(post['image'])
+                            pfp = fs.get(post['pfp']
+                         <div class="cell rounded" name=$id>
+                             <div class="bg-white">
+                                 <div class="d-flex flex-row align-content-end">
+                                     <img class = "m-1" src=$pfp style="width: 32px; height: 32px;">
+                                     <a id="username" name=$id class="m-1" href="/profile/$post['username']"> $post['username']</a>
+                                     <p class="ml-auto ml-4">$post['date'].strftime('%x')</p>
+                                 </div>
+                                 <p id="content" name=$id class="mb-0">$post['content']</p>
+                                 $if post['image'] != None:
+                                    <img style="width: 100%; height: 100%;" src=$image></img>
+                                 <div class="d-flex justify-content-end me-2">
+                                     <a name=$id class="like-button button mb-0"><i class="fas fa-star"></i><p id="stars" class="text-center">$post['stars']</p></a>
+                                 </div>
                              </div>
                              <!--- comments --->
                              $if post['comments'] != None:
                                 $for comment in post['comments']:
-                                     <div class="bg-dark">
+                                    $code:
+                                        fs = gridfs.GridFS(pymongo.MongoClient())
+                                        comment_pfp = fs.get(comment['pfp'])
+                                     <div >
                                          <div class="d-flex flex-row align-content-end">
-                                             <img class = "m-1" src="https://64.media.tumblr.com/2e2bd612f4e03ad4bf38b1d3f9e585bb/tumblr_psful8uBVD1sfht6d_400.jpg" style="width: 32px; height: 32px;">
+                                             <img class = "m-1" src=$comment_pfp style="width: 32px; height: 32px;">
                                              <a name=$id class="m-1" href="/profile/$comment['username']"> $comment['username']</a>
                                              <p class="ml-auto ml-4">$comment['date'].strftime('%x')</p>
                                          </div>
-                                         <p name=$id class="mb-0">$post['content']</p>
+                                         <p name=$id class="mb-0">$comment['content']</p>
                                      </div>
                              <div class="comment add clearfix">
                                  <div class="card-header">
@@ -74,8 +84,6 @@ $def with (posts)
                                  </div>
                              </div>
                          </div>
-
-
                      </div>
                    </div>
                 </div>

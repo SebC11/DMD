@@ -1,6 +1,7 @@
 import web
 import random
 import datetime
+import gridfs
 from Models import RegisterModel, LoginModel, Posts
 
 web.config.debug = False
@@ -16,7 +17,8 @@ urls = (
     '/check-login', 'CheckLogin',
     '/post-activity', 'PostActivity',
     '/post-settings', 'PostSettings',
-    '/update-stars', "UpdateStars"
+    '/update-stars', "UpdateStars",
+    '/upload-image', "UploadImage"
 )
 
 app = web.application(urls, globals())
@@ -26,7 +28,8 @@ session_data = session._initializer
 render = web.template.render("Views/Templates", base="MainLayout", globals={'session': session_data,
                                                                             'current_user': session_data["user"],
                                                                             'random': random, "str": str,
-                                                                            'datetime': datetime})
+                                                                            'datetime': datetime,
+                                                                            'gridfs': gridfs})
 
 
 # Classes/Routes
@@ -133,6 +136,13 @@ class UpdateStars:
         post_model.add_star(data.content, data.username, data.stars)
 
         return "success"
+
+
+class UploadImage:
+    def POST(self):
+        data = web.input()
+        post_model = Posts.Posts()
+        post_model.insert_image(data.image, data.postID);
 
 
 if __name__ == "__main__":

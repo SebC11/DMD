@@ -6,7 +6,7 @@ from pymongo import MongoClient
 class LoginModel:
 
     def __init__(self):
-        self.client = pymongo.MongoClient("")
+        self.client = pymongo.MongoClient()
         self.db = self.client["users"]
         self.col = self.db["user"]
 
