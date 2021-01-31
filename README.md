@@ -1,6 +1,6 @@
 # Discrete Math Dislikers #
 
-This is a social media website that I made to complain about Discrete Math topics and classes with my friends. Users can create accounts, login, make posts, upload images, make comments, and interact with a wide community of people who don't enjoy Discrete Math too much.
+This is a social media website that I made to complain about Discrete Math topics and classes with my friends. Users can create accounts, login, make posts, upload images, make comments, and interact with a wide community of people who don't enjoy Discrete Math too much. My main goal with this project was to reinforce my learning and understanding of python while also working on skills critical to backend development as well as front end. In the future I hope to potentially rewrite this project in flask as well as redo certain aspects of the code to optimize them and make a few small touches to the front end layout. However, I am satisfied with how it came out and am proud of what I was able to achieve.
 
 ![Website](static/images/websiteSC.png)
 
